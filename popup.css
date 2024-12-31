@@ -1,0 +1,417 @@
+body {
+  width: 280px;
+  padding: 20px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f0f2f5;
+  color: #333;
+}
+
+.header {
+  margin-bottom: 20px;
+  width: 100%;
+  border-bottom: 2px solid #e1e4e8;
+  padding-bottom: 15px;
+}
+
+.header h1 {
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0;
+  color: #2c3e50;
+}
+
+.buttons-wrapper {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: 15px;
+}
+
+.buttons-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 10px;
+}
+
+button {
+  padding: 10px 15px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #3498db;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 7px 14px rgba(0, 0, 0, 0.18);
+}
+
+button:hover::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+.buttons-row button {
+  flex: 1;
+}
+
+button#bulk-delete,
+button#toggle-checkboxes,
+button#bulk-archive {
+  font-size: 16px;
+  width: 100%;
+  margin-top: 5px;
+  padding: 12px 15px;
+  position: relative;
+}
+
+button#bulk-archive#locked {
+  position: absolute;
+  left: 75px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+button#add-checkboxes {
+  background-color: #2ecc71;
+}
+button#remove-checkboxes {
+  background-color: #e86354;
+}
+button#toggle-checkboxes {
+  background-color: #f39c12;
+}
+button#bulk-delete {
+  background-color: #e74c3c;
+}
+button#bulk-archive {
+  background-color: #9b59b6;
+}
+
+.footer {
+  margin-top: 20px;
+  width: 100%;
+  font-size: 12px;
+  text-align: center;
+  border-top: 2px solid #e1e4e8;
+  padding-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+#sponsorLink {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 15px;
+  background-color: #34495e;
+  border-radius: 5px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+#sponsorLink:hover {
+  background-color: #2c3e50;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+#sponsorLink .icon-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#sponsorLink:hover {
+  background-color: #993366;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 5% auto;
+  padding: 0;
+  border-radius: 10px;
+  width: 260px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  overflow: hidden;
+}
+
+.modal h2 {
+  margin: 0;
+  padding: 15px 0;
+  background-color: #4a4a4a;
+  color: white;
+  font-size: 18px;
+  width: 100%;
+}
+
+.modal p {
+  color: #666;
+  font-size: 14px;
+  margin: 20px 15px;
+}
+
+.modal-separator {
+  height: 1px;
+  background-color: #e0e0e0;
+  margin: 15px 0;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding-bottom: 20px;
+}
+
+.modal-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.modal-button-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.modal-button-primary:hover {
+  background-color: #0056b3;
+}
+
+#modalCancel {
+  background-color: #f8f9fa;
+  color: #333;
+}
+
+#modalCancel:hover {
+  background-color: #e2e6ea;
+}
+
+/* 调整 button-container 样式 */
+.button-container {
+  position: relative;
+  display: inline-block;
+  width: calc(50% - 5px); /* 调整宽度以适应两个按钮并留有间隙 */
+}
+
+/* 调整 tooltip-trigger 样式 */
+.tooltip-trigger {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.9); /* 近白色 */
+  font-size: 14px;
+  font-style: italic;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: help;
+  transition: all 0.3s ease;
+  z-index: 2;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.5); /* 添加轻微阴影以增加可见度 */
+}
+
+/* 调整 tooltip-content 样式 */
+.tooltip-content {
+  visibility: hidden;
+  width: 130px;
+  background-color: #333;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 10px;
+  position: absolute;
+  z-index: 3;
+  top: -5px;
+  left: calc(100% + 10px);
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
+  pointer-events: none;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 1.4;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tooltip-content::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent #333 transparent transparent;
+}
+
+.tooltip-trigger:hover .tooltip-content {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 确保按钮容器不会因为tooltip内容而变形 */
+.button-container {
+  position: relative;
+  display: inline-block;
+  width: calc(50% - 5px);
+  overflow: visible;
+}
+
+/* 可能需要调整按钮样式以适应新的布局 */
+.buttons-row button,
+.button-container button {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* 更新按钮悬停效果 */
+.button-container:hover button,
+.button-container:hover .tooltip-trigger {
+  transform: translateY(-3px);
+}
+
+/* 添加悬停效果到 i 图标 */
+.tooltip-trigger:hover {
+  color: #fff; /* 完全白色 */
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.5); /* 增强悬停时的光晕效果 */
+}
+
+button#bulk-delete,
+button#bulk-archive {
+  background-color: #e74c3c;
+  color: white;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button#bulk-archive {
+  background-color: #9b59b6;
+}
+
+/* Progress bar styles */
+button#bulk-delete::before,
+button#bulk-archive::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(46, 204, 113, 0.5);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+button#bulk-delete.progress,
+button#bulk-archive.progress {
+  cursor: not-allowed;
+  background-color: #34495e;
+}
+
+button#bulk-delete.progress::before,
+button#bulk-archive.progress::before {
+  transform: translateX(var(--progress, -100%));
+}
+
+/* Progress text styles */
+.progress-text {
+  position: absolute;
+  left: 10px;
+  font-weight: bold;
+}
+
+.button-text {
+  z-index: 1;
+  position: relative;
+}
+
+/* Pulsing animation for the progress bar */
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+button#bulk-delete.progress::before,
+button#bulk-archive.progress::before {
+  animation: pulse 2s infinite;
+}

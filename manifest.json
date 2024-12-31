@@ -1,26 +1,33 @@
 {
   "manifest_version": 3,
-  "name": "ChatGPT Project Organizer",
-  "version": "1.0",
-  "description": "Organize ChatGPT chats into projects.",
-  "permissions": ["activeTab", "storage", "scripting"],
-  "host_permissions": ["https://chat.openai.com/*"],
-  "action": {
-    "default_popup": "popup.html",
-    "default_icon": {
-      "16": "icon.png",
-      "48": "icon.png",
-      "128": "icon.png"
-    }
+  "name": "ChatGPT Bulk Delete",
+  "version": "5.7",
+  "description": "A Chrome extension to bulk delete ChatGPT conversations",
+  "icons": {
+    "48": "icon48.png"
   },
+  "action": {
+    "default_icon": "icon48.png",
+    "default_popup": "popup.html",
+    "default_title": "Bulk Delete Conversations"
+  },
+  "permissions": ["scripting", "activeTab", "identity", "identity.email", "storage"],
+  "host_permissions": ["https://bulk-delete-chatgpt-worker.qcrao.com/*"],
   "background": {
     "service_worker": "background.js"
   },
   "content_scripts": [
     {
-      "matches": ["https://chat.openai.com/*"],
-      "js": ["content.js"]
+      "matches": ["*://chat.openai.com/*", "*://chatgpt.com/*"],
+      "js": [
+        "globals.js",
+        "utils.js",
+        "addCheckboxes.js",
+        "bulkDeleteConversations.js",
+        "bulkAddToProjects.js",
+	"bulkArchiveConversations.js"
+      ],
+      "run_at": "document_idle"
     }
   ]
 }
-

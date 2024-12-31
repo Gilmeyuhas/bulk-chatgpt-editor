@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>ChatGPT Organizer</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ChatGPT Project Manager</title>
+  <link rel="stylesheet" href="popup.css" />
 </head>
 <body>
-  <h1>Organize Chats</h1>
-  <p>Select chats from the ChatGPT interface, then save them to a project.</p>
-  <input type="text" id="projectName" placeholder="Project Name">
-  <button id="saveChats">Save Selected Chats</button>
-  <div id="status"></div>
+  <div class="header">
+    <h1>ChatGPT Project Manager</h1>
+  </div>
+  <div class="buttons-wrapper">
+    <div class="buttons-row">
+      <button id="add-checkboxes">Add Checkboxes</button>
+      <button id="remove-checkboxes">Remove Checkboxes</button>
+    </div>
+    <div class="project-management">
+      <input type="text" id="project-name" placeholder="Enter Project Name" />
+      <button id="add-to-project">Add to Project</button>
+    </div>
+    <button id="toggle-checkboxes">Toggle Checkboxes</button>
+  </div>
   <script src="popup.js"></script>
 </body>
 </html>

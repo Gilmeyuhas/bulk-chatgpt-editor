@@ -1,14 +1,34 @@
-chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
-  if (message.action === "saveChat") {
-    chrome.storage.local.get("projects", (data) => {
-      const projects = data.projects || {};
-      const projectChats = projects[message.projectName] || [];
-      projectChats.push(...message.chats); // Append multiple chats
-      projects[message.projectName] = projectChats;
-      chrome.storage.local.set({ projects });
-      sendResponse({ success: true });
+console.log("Background script loaded");
+
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.storage.local.set({ projects: {} });
+  console.log("Project storage initialized.");
+});
+chrome.runtime.onInstalled.addListener(() => {
+  console.log("Extension installed");
+  
+  // Initialize projects storage if not present
+  chrome.storage.local.get("projects", (data) => {
+    if (!data.projects) {
+      chrome.storage.local.set({ projects: {} }, () => {
+        console.log("Initialized empty projects storage.");
+      });
+    }
+  });
+});
+
+chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
+  if (request.action === "getUserInfo") {
+    chrome.identity.getProfileUserInfo({ accountStatus: "ANY" }, (userInfo) => {
+      if (chrome.runtime.lastError) {
+        console.error(chrome.runtime.lastError);
+        sendResponse({ error: chrome.runtime.lastError.message });
+      } else {
+        sendResponse({ userInfo: userInfo });
+      }
     });
-    return true;
+    return true; // Will respond asynchronously
   }
 });
 
+console.log("Background script setup complete");
