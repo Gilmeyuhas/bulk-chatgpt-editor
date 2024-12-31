@@ -1,0 +1,26 @@
+{
+  "manifest_version": 3,
+  "name": "ChatGPT Project Organizer",
+  "version": "1.0",
+  "description": "Organize ChatGPT chats into projects.",
+  "permissions": ["activeTab", "storage", "scripting"],
+  "host_permissions": ["https://chat.openai.com/*"],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://chat.openai.com/*"],
+      "js": ["content.js"]
+    }
+  ]
+}
+

@@ -1,1 +1,4 @@
 # bulk-chatgpt-editor
+THIS IS A WORK IN PROGRESS!
+
+IT DOES NOT WORK YET!
