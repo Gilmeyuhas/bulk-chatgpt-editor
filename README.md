@@ -1,0 +1,1 @@
+# bulk-chatgpt-editor
